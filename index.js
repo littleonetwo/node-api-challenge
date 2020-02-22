@@ -1,14 +1,33 @@
-/*
-play this: https://www.youtube.com/watch?v=d-diB65scQU
+require('dotenv').config();
+//setup our middleware requirements
+const express = require('express');
+const helmet = require('helmet');
+const logger = require('./middleware/logger.js');
 
-Sing along:
 
-here's a little code I wrote, please read the README word for word, don't worry, you got this
-in every task there may be trouble, but if you worry you make it double, don't worry, you got this
-ain't got no sense of what is REST? just concentrate on learning Express, don't worry, you got this
-your file is getting way too big, bring a Router and make it thin, don't worry, be crafty
-there is no data on that route, just write some code, you'll sort it out… don't worry, just hack it…
-I need this code, but don't know where, perhaps should make some middleware, don't worry, just hack it
+//setup our server
+const server = express();
+const port = process.env.PORT || 5000;
 
-Go code!
-*/
+//add routers
+const projectRoutes = require('./routers/projectRouter.js');
+const actionRoutes = require('./routers/actionRouter.js');
+
+//build out server dependencies
+server.use(helmet());
+server.use(express.json());
+server.use(logger('short'));
+
+
+
+server.use('/api/project', projectRoutes);
+server.use('/api/action', actionRoutes);
+
+
+//if nothing is found throw up an error
+server.use(function(req, res) {
+  res.status(404).json({errorMessage:"This site does not currently exist!"});
+})
+
+//choose a port to work out of should be at end of file
+server.listen(4000, () => console.log(`\n***Server running on http://localhost:${port}***\n`));

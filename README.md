@@ -40,13 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+Routing and Middleware
+
 - [ ] Describe Middleware?
+
+middleware is basically an array of functions that can be customized to add more features to Express to make it more dry/clean, it adds stuff to the middle of the process to help end goals be more achieveable.
 
 - [ ] Describe a Resource?
 
+a point where you can access information that can be used to develop projects or just have access to said information.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+status codes
+
 - [ ] How can we partition our application into sub-applications?
+
+by using routers and .use you can call the apps needed and organize them in your main index.js file to call in the order needed to keep things clean 
 
 ## Minimum Viable Product
 
